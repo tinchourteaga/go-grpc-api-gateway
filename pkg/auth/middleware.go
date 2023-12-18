@@ -13,8 +13,8 @@ type AuthMiddleware struct {
 	authSvcClient *AuthServiceClient
 }
 
-func NewAuthMiddleware(asc *AuthServiceClient) AuthMiddleware {
-	return AuthMiddleware{authSvcClient: asc}
+func NewAuthMiddleware(svc *AuthServiceClient) AuthMiddleware {
+	return AuthMiddleware{authSvcClient: svc}
 }
 
 func (am *AuthMiddleware) Authenticate(ctx *gin.Context) {

@@ -18,6 +18,7 @@ func NewAuthServiceClient() pb.AuthServiceClient {
 	connection, err := grpc.Dial(viper.GetString("AUTH_SVC_URL"), grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Error().Msg("could not establish connection: " + err.Error())
+		return nil
 	}
 
 	return pb.NewAuthServiceClient(connection)

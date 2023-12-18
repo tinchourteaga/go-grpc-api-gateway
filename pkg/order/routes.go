@@ -11,7 +11,7 @@ func MapRoutes(r *gin.Engine, authSvc *auth.AuthServiceClient) {
 		Client: NewOrderServiceClient(),
 	}
 
-	routes := r.Group("/auth")
-	routes.Use(authMW.Authenticate)
-	routes.POST("/", svc.CreateOrder)
+	rg := r.Group("/order")
+	rg.Use(authMW.Authenticate)
+	rg.POST("/", svc.CreateOrder)
 }

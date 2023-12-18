@@ -4,12 +4,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func MapRoutes(r *gin.Engine) {
+func MapRoutes(r *gin.Engine) *AuthServiceClient {
 	svc := &AuthServiceClient{
 		Client: NewAuthServiceClient(),
 	}
 
-	routes := r.Group("/auth")
-	routes.POST("/register", svc.Register)
-	routes.POST("/login", svc.Login)
+	rg := r.Group("/auth")
+	rg.POST("/register", svc.Register)
+	rg.POST("/login", svc.Login)
+
+	return svc
 }

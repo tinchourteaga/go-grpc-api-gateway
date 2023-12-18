@@ -18,6 +18,7 @@ func NewOrderServiceClient() pb.OrderServiceClient {
 	connection, err := grpc.Dial(viper.GetString("ORDER_SVC_URL"), grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Error().Msg("could not establish connection: " + err.Error())
+		return nil
 	}
 
 	return pb.NewOrderServiceClient(connection)

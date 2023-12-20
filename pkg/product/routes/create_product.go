@@ -10,7 +10,6 @@ import (
 
 type CreateProductRequestBody struct {
 	Name  string `json:"name"`
-	Sku   string `json:"sku"`
 	Stock int64  `json:"stock"`
 	Price int64  `json:"price"`
 }
@@ -25,7 +24,6 @@ func CreateProduct(ctx *gin.Context, productSvcClient pb.ProductServiceClient) {
 
 	pbCreateProductReq := pb.CreateRequest{
 		Name:  body.Name,
-		Sku:   body.Sku,
 		Stock: body.Stock,
 		Price: body.Price,
 	}

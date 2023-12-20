@@ -32,5 +32,5 @@ func Register(ctx *gin.Context, authSvcClient pb.AuthServiceClient) {
 		return
 	}
 
-	ctx.JSON(http.StatusCreated, &res)
+	ctx.JSON(int(res.Status), &res)
 }

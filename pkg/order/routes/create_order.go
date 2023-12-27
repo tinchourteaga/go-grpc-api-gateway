@@ -3,6 +3,7 @@ package routes
 import (
 	"context"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/tinchourteaga/go-grpc-api-gateway/pkg/order/pb"
@@ -22,11 +23,16 @@ func CreateOrder(ctx *gin.Context, orderSvcClient pb.OrderServiceClient) {
 	}
 
 	userId, _ := ctx.Get("userId")
+	userId, err := strconv.Atoi(userId.(string))
+	if err != nil {
+		ctx.AbortWithError(http.StatusBadGateway, err)
+		return
+	}
 
 	pbCreateOrderReq := pb.CreateRequest{
 		ProductId: body.ProductId,
 		Quantity:  body.Quantity,
-		UserId:    userId.(int64),
+		UserId:    int64(userId.(int)),
 	}
 
 	res, err := orderSvcClient.CreateOrder(context.Background(), &pbCreateOrderReq)
